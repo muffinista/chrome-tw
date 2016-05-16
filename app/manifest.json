@@ -14,12 +14,15 @@
       "scripts/background.js"
     ]
   },
-  "permissions": ["https://twitter.com/*"],
+  "permissions": [
+    "storage",
+    "https://twitter.com/*"
+  ],
   "content_scripts": [
     {
       "matches": ["https://twitter.com/*"],
       "css": ["styles.css"],
-      "js": ["main.js"]
+      "js": ["mustache.js", "main.js"]
     }
   ],
   "page_action": {
@@ -27,5 +30,9 @@
       "19": "images/icon-19.png",
       "38": "images/icon-38.png"
     }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
   }
 }
