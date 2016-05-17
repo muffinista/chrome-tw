@@ -78,12 +78,12 @@
 
     if ( data.prefixes.length > 0 ) {
       check_prefix = true;
-      prefix_regexp = new RegExp("^(" + data.prefixes.split(",").join("|") + ")");
+      prefix_regexp = new RegExp("^(" + data.prefixes.split(",").join("|") + ")", "gim");
     }
     if ( data.anywhere.length > 0 ) {
       check_anywhere = true;
-      console.log("**** " + data.anywhere);
-      anywhere_regexp = new RegExp("(" + data.anywhere.split(",").join("|") + ")");
+      //console.log("**** " + data.anywhere);
+      anywhere_regexp = new RegExp("(" + data.anywhere.split(",").join("|") + ")", "gim");
     }
 
     //console.log(prefix_regexp);

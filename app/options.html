@@ -3,13 +3,35 @@
 <head>
   <title>My Test Extension Options</title>
   <style>
-    body: { padding: 10px; }
+   body { padding: 10px; }
+   div.option {
+     margin-bottom: 10px;
+   }
+   label {
+     font-weight: bold;
+     display: block;
+   }
+   .hint {
+     font-size: 90%;
+   }
   </style>
 </head>
 
 <body>
-  Mask tweets that start with: <input type="text" name="prefixes" id="prefixes" />
-  Mask tweets that contain: <input type="text" name="anywhere" id="anywhere" />
+  <div class="option">
+    <label for="prefixes">Mask tweets that start with:</label>
+    <input type="text" name="prefixes" id="prefixes" />
+    <div class="hint">Any tweets that start with this text will be
+    masked. Specify multiple phrases with commas (a, b, c)</div>
+  </div>
+
+
+  <div class="option">
+    <label for="anywhere">Mask tweets that contain:</label>
+    <input type="text" name="anywhere" id="anywhere" />
+    <div class="hint">Any tweets that contain this text anywhere will be
+    masked. Specify multiple phrases with commas (a, b, c)</div>
+  </div>
 
   <div id="status"></div>
   <button id="save">Save</button>
