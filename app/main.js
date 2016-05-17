@@ -62,20 +62,11 @@
         }
     };
   }
-
-  function tick() {
-    findKeywords();
-    window.setTimeout(tick, 5000);
-  }
- 
   
   chrome.storage.sync.get({
     prefixes: '',
     anywhere: ''
   }, function(data) {
-    //console.log(data);
-
-
     if ( data.prefixes.length > 0 ) {
       check_prefix = true;
       prefix_regexp = new RegExp("^(" + data.prefixes.split(",").join("|") + ")", "gim");
