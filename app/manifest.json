@@ -1,10 +1,11 @@
 {
-  "name": "__MSG_appName__",
+  "name": "Tweet Masker",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "__MSG_appDescription__",
+  "description": "Mask tweets that have certain words or phrases in them",
   "icons": {
     "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
     "128": "images/icon-128.png"
   },
   "default_locale": "en",
@@ -25,7 +26,7 @@
       "js": ["mustache.js", "main.js"]
     }
   ],
-  "page_action": {
+  "off_page_action": {
     "default_icon": {
       "19": "images/icon-19.png",
       "38": "images/icon-38.png"
