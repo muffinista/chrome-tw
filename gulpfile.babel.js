@@ -7,6 +7,10 @@ import {stream as wiredep} from 'wiredep';
 
 const $ = gulpLoadPlugins();
 
+var crx = require('gulp-crx-pack');
+var manifest = require('./app/manifest.json');
+
+
 gulp.task('extras', () => {
   return gulp.src([
     'app/*.*',
@@ -121,6 +125,17 @@ gulp.task('package', function () {
   return gulp.src('dist/**')
       .pipe($.zip('chrome tw-' + manifest.version + '.zip'))
       .pipe(gulp.dest('package'));
+});
+
+
+gulp.task('crx', function() {
+  var fs = require('fs');
+  return gulp.src('./dist/')
+             .pipe(crx({
+               privateKey: fs.readFileSync('./certs/key.pem', 'utf8'),
+               filename: manifest.name + '.crx'
+             }))
+             .pipe(gulp.dest('./build'));
 });
 
 gulp.task('build', (cb) => {
