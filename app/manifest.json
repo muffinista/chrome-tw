@@ -26,12 +26,6 @@
       "js": ["mustache.js", "main.js"]
     }
   ],
-  "off_page_action": {
-    "default_icon": {
-      "19": "images/icon-19.png",
-      "38": "images/icon-38.png"
-    }
-  },
   "options_ui": {
     "page": "options.html",
     "chrome_style": true
