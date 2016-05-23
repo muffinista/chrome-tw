@@ -22,8 +22,8 @@
 function restore_options() {
   // Use default value color = 'red' and likesColor = true.
   chrome.storage.sync.get({
-      prefixes: 'cw , tw',
-      anywhere: 'rape'
+      prefixes: '',
+      anywhere: ''
   }, function(items) {
       document.getElementById('prefixes').value = items.prefixes;
       document.getElementById('anywhere').value = items.anywhere;
