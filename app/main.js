@@ -10,13 +10,16 @@
   // add iterators to nodelist so we can use a for loop
   // @see https://jakearchibald.com/2014/iterators-gonna-iterate/
   NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+
   
-  function findKeywords() {
-    var data = document.querySelectorAll("li.stream-item");
+  function findKeywords(klass) {
+    var data = document.querySelectorAll(klass);
+    //console.log(klass);
+
     for (var el of data) {
-        var item_id, text, holder, matched, match;
-        if ( ! el.classList.contains("tw-checked") ) {
-            el.classList.add("tw-checked");
+      var item_id, text, holder, matched, match;
+      if ( ! el.classList.contains("tw-checked") ) {
+        el.classList.add("tw-checked");
 
           item_id = el.attributes['data-item-id'].value;
           holder = el.querySelector(".tweet-text")
@@ -35,7 +38,8 @@
             if ( matched == false ) {
               continue;
             }
-                       
+
+            el.classList.add("tw-checked");  
             el.classList.add("obscure");
             text = match[0];
 
@@ -52,16 +56,22 @@
               var tweet_id = x.target.attributes["data-tweet-id"].value;
               var revealMe = document.querySelector("[data-item-id='" + tweet_id + "']");
               
+              x.preventDefault();
+
               revealMe.classList.remove("obscure");
               x.target.parentNode.remove();
-              
-              x.preventDefault();
-              
             });
           }
         }
     };
   }
+
+  function checkForTweets(klass) {
+    findKeywords(klass);
+    findKeywords(".QuoteTweet-innerContainer[data-item-type='tweet']");
+    findKeywords(".permalink-tweet[data-tweet-id]");
+  }
+
   
   chrome.storage.sync.get({
     prefixes: '',
@@ -81,15 +91,31 @@
     //console.log(anywhere_regexp);    
 
     if ( check_prefix || check_anywhere ) {
-      findKeywords();
-    
+      var klass;
+      if ( document.querySelectorAll("li.stream-item").length > 0 ) {
+        klass = "li.stream-item";
+      }
+      else {
+        klass = "div.original-permalink-page div.tweet";
+      }
+
+      checkForTweets(klass);
+      
       // select the target node
-      var target = document.querySelector('#stream-items-id');
+      var target = document.querySelector('body');
 
       // create an observer instance
       var observer = new MutationObserver(function(mutations) {  
         //console.log("here");
-        findKeywords();
+        var klass;
+        if ( document.querySelectorAll("li.stream-item").length > 0 ) {
+          klass = "li.stream-item";
+        }
+        else {
+          klass = "div.original-permalink-page div.tweet";
+        }
+
+        checkForTweets(klass);
       });
     
       // configuration of the observer:
