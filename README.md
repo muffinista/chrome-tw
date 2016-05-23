@@ -18,6 +18,19 @@ Any masked tweets will still be in your timeline, with a 'show' link
 and the snippet of text that caused them to be hidden. You can click
 the link to see the tweet.
 
+## Why?
+
+Idea based on these tweets:
+
+https://twitter.com/mattlaschneider/status/730203784484405248
+
+https://twitter.com/swayandsea/status/730410721645748225
+
+
 ## How to use it
 
+* Download [this file](https://github.com/muffinista/chrome-tw/raw/master/build/Tweet%20Masker.crx)
+to your computer
+* open the Extensions page in Chrome (Window → Extensions)
+* Drag the downloaded .crx file into the Extensions page.
 
