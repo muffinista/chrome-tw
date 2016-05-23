@@ -77,9 +77,9 @@ gulp.task('chromeManifest', () => {
       }
   }))
   .pipe($.if('*.css', $.cleanCss({compatibility: '*'})))
-  .pipe($.if('*.js', $.sourcemaps.init()))
-  .pipe($.if('*.js', $.uglify()))
-  .pipe($.if('*.js', $.sourcemaps.write('.')))
+//  .pipe($.if('*.js', $.sourcemaps.init()))
+//  .pipe($.if('*.js', $.uglify().on('error', console.log)))
+//  .pipe($.if('*.js', $.sourcemaps.write('.')))
   .pipe(gulp.dest('dist'));
 });
 
@@ -142,7 +142,7 @@ gulp.task('build', (cb) => {
   runSequence(
     'lint', 'babel', 'chromeManifest',
     ['html', 'images', 'extras'],
-    'size', cb);
+    'size', 'crx', cb);
 });
 
 gulp.task('default', ['clean'], cb => {
