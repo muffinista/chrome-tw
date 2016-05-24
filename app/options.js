@@ -22,7 +22,7 @@
 function restore_options() {
   // Use default value color = 'red' and likesColor = true.
   chrome.storage.sync.get({
-      prefixes: '',
+      prefixes: 'tw ,cw ',
       anywhere: ''
   }, function(items) {
       document.getElementById('prefixes').value = items.prefixes;
