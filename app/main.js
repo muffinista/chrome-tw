@@ -23,7 +23,7 @@
   
   function findKeywords() {
     var data = document.querySelectorAll(".tweet-text");
-
+    
     for (var el of data) {
       var item_id, text, holder, matched, match;
       if ( ! el.classList.contains(CHECKED_CLASS) ) {
@@ -99,10 +99,10 @@
       var observer = new MutationObserver(findKeywords);
     
       // configuration of the observer:
-      var config = { attributes: true, childList: true, characterData: false };
+      var config = { attributes: true, childList: true, characterData: true };
     
       // pass in the target node, as well as the observer options
-      observer.observe(target, config);
+      observer.observe(document.body, config);
     }
     
   });
