@@ -10,6 +10,11 @@
   const OBSCURE_CLASS = "obscure";
   const CHECKED_CLASS = "tw-checked";
   const TARGET_NODE = "html";
+
+  const DEFAULT_SETTINGS = {
+    prefixes: '',
+    anywhere: ''
+  };
   
   
   // add iterators to nodelist so we can use a for loop
@@ -74,10 +79,7 @@
   }
   
   
-  chrome.storage.sync.get({
-    prefixes: '',
-    anywhere: ''
-  }, function(data) {
+  chrome.storage.sync.get(DEFAULT_SETTINGS, function(data) {
     if ( data.prefixes.length > 0 ) {
       check_prefix = true;
       prefix_regexp = new RegExp("^(" + data.prefixes.split(",").join("|") + ")", "gim");
@@ -89,8 +91,7 @@
     
     if ( check_prefix || check_anywhere ) {
       findKeywords();
-
-      
+     
       // select the target node
       var target = document.querySelector(TARGET_NODE);
       
