@@ -22,13 +22,12 @@
   NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
   
   function findKeywords() {
-    var data = document.querySelectorAll(".tweet-text");
-    
-    for (var el of data) {
-      var item_id, text, holder, matched, match;
-      if ( ! el.classList.contains(CHECKED_CLASS) ) {
-        el.classList.add(CHECKED_CLASS);
-        holder = el;
+    var data = document.querySelectorAll(".tweet-text:not(." + CHECKED_CLASS + ")");
+    console.log("here");
+    for (var holder of data) {
+      var item_id, text, matched, match;
+      if ( ! holder.classList.contains(CHECKED_CLASS) ) {
+        holder.classList.add(CHECKED_CLASS);
         if ( holder ) {
           text = holder.innerText;
 
@@ -45,7 +44,7 @@
             continue;
           }
             
-          el.classList.add(OBSCURE_CLASS);
+          holder.classList.add(OBSCURE_CLASS);
           text = match[0];
             
           var snippet = Mustache.to_html(tmpl, {text:text, id:item_id});
@@ -55,7 +54,7 @@
 
           holder.parentNode.insertBefore(div, holder);
             
-          var link = el.parentNode.querySelector(".reveal-tweet");
+          var link = holder.parentNode.querySelector(".reveal-tweet");
           link.addEventListener("click", function(x) {
             var holder = x.target.parentNode.parentNode;
             var toggleMe = holder.querySelector("." + CHECKED_CLASS);
@@ -99,10 +98,10 @@
       var observer = new MutationObserver(findKeywords);
     
       // configuration of the observer:
-      var config = { attributes: true, childList: true, characterData: true };
+      var config = { attributes: true, childList: true, subtree:true, characterData: true };
     
       // pass in the target node, as well as the observer options
-      observer.observe(document.body, config);
+      observer.observe(target, config);
     }
     
   });
