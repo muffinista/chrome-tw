@@ -20,10 +20,29 @@
   // add iterators to nodelist so we can use a for loop
   // @see https://jakearchibald.com/2014/iterators-gonna-iterate/
   NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+
+  function toggleObscure(el) {
+    var toggle_parent = false;
+    if ( el.parentNode.classList.contains("js-tweet-text-container") ) {
+      toggle_parent = true;
+    }
+    
+    if ( el.classList.contains(OBSCURE_CLASS) ) {
+      el.classList.remove(OBSCURE_CLASS);
+      if ( toggle_parent ) {
+        el.parentNode.classList.remove(OBSCURE_CLASS);
+      }
+    }
+    else {
+      el.classList.add(OBSCURE_CLASS);
+      if ( toggle_parent ) {
+        el.parentNode.classList.add(OBSCURE_CLASS);
+      }
+    }
+  }
   
   function findKeywords() {
     var data = document.querySelectorAll(".tweet-text:not(." + CHECKED_CLASS + ")");
-    console.log("here");
     for (var holder of data) {
       var item_id, text, matched, match;
       if ( ! holder.classList.contains(CHECKED_CLASS) ) {
@@ -43,8 +62,9 @@
           if ( matched == false ) {
             continue;
           }
-            
-          holder.classList.add(OBSCURE_CLASS);
+
+          toggleObscure(holder);
+
           text = match[0];
             
           var snippet = Mustache.to_html(tmpl, {text:text, id:item_id});
@@ -61,13 +81,11 @@
             
             if ( typeof(toggleMe) !== "undefined" ) {
               x.preventDefault();
-              
-              if ( toggleMe.classList.contains(OBSCURE_CLASS) ) {
-                toggleMe.classList.remove(OBSCURE_CLASS);
+              toggleObscure(toggleMe);
+              if ( x.target.innerHTML.indexOf("show") !== -1 ) {
                 x.target.innerHTML = "[ hide ]";
               }
               else {
-                toggleMe.classList.add(OBSCURE_CLASS);
                 x.target.innerHTML = "[ show ]";
               }
             }
