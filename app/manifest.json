@@ -1,6 +1,6 @@
 {
   "name": "Tweet Masker",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "manifest_version": 2,
   "description": "Mask tweets that have certain words or phrases in them",
   "icons": {
@@ -21,7 +21,7 @@
   ],
   "content_scripts": [
     {
-      "matches": ["https://twitter.com/*"],
+      "matches": ["https://twitter.com/*", "https://tweetdeck.twitter.com/*"],
       "css": ["styles.css"],
       "js": ["mustache.js", "main.js"]
     }
