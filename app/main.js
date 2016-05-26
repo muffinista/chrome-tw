@@ -11,7 +11,12 @@
   const CHECKED_CLASS = "tw-checked";
   const TARGET_NODE = "html";
 
+  const COMMON = [
+    "cw ", "tw ", "trigger warning", "content warning"
+  ];
+  
   const DEFAULT_SETTINGS = {
+    common: true,
     prefixes: '',
     anywhere: ''
   };
@@ -97,6 +102,11 @@
   
   
   chrome.storage.sync.get(DEFAULT_SETTINGS, function(data) {
+    // super hacky
+    if ( data.common == true ) {
+      data.prefixes = (data.prefixes.split(",").concat(COMMON)).join(",");
+    }
+    
     if ( data.prefixes.length > 0 ) {
       check_prefix = true;
       prefix_regexp = new RegExp("^(" + data.prefixes.split(",").join("|") + ")", "gim");
