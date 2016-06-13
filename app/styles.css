@@ -5,5 +5,5 @@ div.content .obscure + .card2,
 .obscure + .AdaptiveMedia,
 .obscure + .media-preview,
 .obscure + p + .QuoteTweet {
-    -webkit-filter: blur(8px);
+    -webkit-filter: blur(10px);
 }
