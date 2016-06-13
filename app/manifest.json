@@ -1,6 +1,8 @@
 {
   "name": "Tweet Masker",
-  "version": "0.0.6",
+  "short_name": "Tweet Masker",
+  "homepage_url": "http://muffinlabs.com/",
+  "version": "0.1.2",
   "manifest_version": 2,
   "description": "Mask tweets that have certain words or phrases in them",
   "icons": {

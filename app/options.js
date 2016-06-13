@@ -1,7 +1,7 @@
 const DEFAULT_SETTINGS = {
   common: true,
-  prefixes: prefixes,
-  anywhere: anywhere
+  prefixes: "",
+  anywhere: ""
 };
 
 function save_options() {
@@ -30,6 +30,7 @@ function save_options() {
 function restore_options() {
   // Use default value color = 'red' and likesColor = true.
   chrome.storage.sync.get(DEFAULT_SETTINGS, function(items) {
+    console.log(items);
     if ( items.common === true ) {
       document.getElementById('common').checked = true;
     }

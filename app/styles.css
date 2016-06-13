@@ -1,6 +1,9 @@
 .tweet-text.obscure,
 .obscure p.tweet-text,
 .obscure .tweet-content .tweet-text,
-div.content .obscure + .card2, .obscure + .AdaptiveMedia, .obscure + .media-preview {
-    -webkit-filter: blur(5px);
+div.content .obscure + .card2,
+.obscure + .AdaptiveMedia,
+.obscure + .media-preview,
+.obscure + p + .QuoteTweet {
+    -webkit-filter: blur(8px);
 }

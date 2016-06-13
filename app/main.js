@@ -102,18 +102,30 @@
   
   
   chrome.storage.sync.get(DEFAULT_SETTINGS, function(data) {
+    var clean;
+
     // super hacky
     if ( data.common == true ) {
       data.prefixes = (data.prefixes.split(",").concat(COMMON)).join(",");
     }
-    
+
     if ( data.prefixes.length > 0 ) {
       check_prefix = true;
-      prefix_regexp = new RegExp("^(" + data.prefixes.split(",").join("|") + ")", "gim");
+      clean = data.prefixes.split(",").filter(function(val) {
+        return ( val.replace(/^\s+|\s+$/g, '') !== "" );
+      });
+
+      // note - swap ' ' with \s to catch a few more tweet cases
+      prefix_regexp = new RegExp("^(" + clean.join("|").replace(/ /g, '\\s')  + ")", "gim");
+      //console.log(prefix_regexp);
     }
     if ( data.anywhere.length > 0 ) {
       check_anywhere = true;
-      anywhere_regexp = new RegExp("(" + data.anywhere.split(",").join("|") + ")", "gim");
+      clean = data.anywhere.split(",").filter(function(val) {
+        return ( val.replace(/^\s+|\s+$/g, '') !== "" );
+      });
+
+      anywhere_regexp = new RegExp("(" + clean.join("|") + ")", "gim");
     }
     
     if ( check_prefix || check_anywhere ) {
