@@ -53,13 +53,14 @@
       if ( ! holder.classList.contains(CHECKED_CLASS) ) {
         holder.classList.add(CHECKED_CLASS);
         if ( holder ) {
-          text = holder.innerText;
+          text = holder.innerText.replace(/^[.,\/!$%\^&\*;:{}=\-_`~()\[]/g,"");
+
 
           matched = false;
           if ( check_prefix === true && ( match = text.match(prefix_regexp) ) ) {
             matched = true;
           }
-            
+
           if ( matched === false && check_anywhere === true && (match = text.match(anywhere_regexp)) ) {
             matched = true;
           }
